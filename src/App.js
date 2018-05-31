@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+const classNames = require('classnames');
 
 class Scroller extends Component {
   constructor(props) {
@@ -29,20 +30,21 @@ class Scroller extends Component {
     
   render() {
     return (
-      <div className="browser-window-mobile">
+      <div
+       className="browser-window-mobile">
 	  <a
-	    href="http://dev.c2st.org/"
-	    target="_blank" rel="noopener noreferrer">
+	   href="http://dev.c2st.org/"
+	   target="_blank" rel="noopener noreferrer">
 	  <img 
-	    className="browser-window-background"
-	    src={require('./img/phone-window-medium.png')}
-	    srcSet={`
+	   className="browser-window-background"
+	   src={require('./img/phone-window-medium.png')}
+	   srcSet={`
 ${require('./img/phone-window-small.png')} 1x, 
 ${require('./img/phone-window-medium.png')} 2x,
 ${require('./img/phone-window-large.png')} 3x`}
-	    width="96" 
-	    height="177" 
-	    alt="" 
+	   width="96" 
+	   height="177" 
+	   alt="" 
 	  />
 	  </a>
           <div className="img-wrap" style={{
@@ -64,41 +66,25 @@ class World extends Component {
   }
 }
 
-class Container extends Component {
+class Moon extends Component {
   render() {
     return (
-      <div className="Container">
-	  <div className="Lid"></div>
-	  <DataHeading />
-	  <Card />
-      </div>
+      <div className="Moon"></div>
     );
-  }
-}
-
-class DataHeading extends Component {
-  render() {
-    return (
-      <div className="DataHeading">
-	  <h2>Recent Work</h2>
-      </div>
-    )
   }
 }
 
 class Card extends Component {
   render() {
+    let ClassList = classNames(
+      'Card',
+      'Button',
+    );
     return (
-      <div className="Card">
-	  <h3>The Chicago Council on Science and Technology</h3>
-	  <p>Dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis! Et ligula ullamcorper malesuada proin libero nunc, consequat interdum varius sit amet, mattis vulputate enim nulla aliquet porttitor lacus?</p>
-	  <p>Sit amet nisl suscipit adipiscing bibendum est ultricies integer quis auctor elit sed vulputate mi sit amet mauris commodo quis imperdiet. Auctor neque, vitae tempus quam pellentesque nec nam aliquam.</p>
-	  <p>Quam pellentesque nec nam aliquam sem et. Non tellus orci, ac auctor augue mauris augue neque, gravida in fermentum et, sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu?</p>
-	  <p>Ac odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus, viverra. Fringilla ut morbi tincidunt augue interdum velit euismod in pellentesque massa placerat duis ultricies lacus sed turpis?</p>
-	  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit pellentesque habitant. Interdum velit euismod in pellentesque massa placerat duis ultricies lacus sed turpis tincidunt id aliquet risus feugiat in ante metus.</p>
-	  <p>Aliquam id diam maecenas ultricies mi eget mauris pharetra et ultrices neque ornare aenean euismod elementum nisi, quis eleifend quam adipiscing. In hendrerit gravida rutrum quisque non tellus orci, ac.</p>
-	  <p>Augue ut lectus arcu, bibendum at varius vel, pharetra vel turpis nunc eget lorem dolor. Tristique senectus et netus et malesuada fames ac turpis egestas maecenas pharetra convallis posuere morbi!</p>
-      </div>
+      <a href="#" className={ClassList}>
+      <h3>{ this.props.heading }</h3>
+      <p>{ this.props.body }</p>
+      </a>
     )
   }
 }
@@ -109,10 +95,26 @@ class App extends Component {
       <div className="App">
 	  <div className="Sea"></div>
 	  <World />
-	  <div className="Mask">
-	      <Container />
+	  <div className="Container">
+	      <div className="DataHeading">
+		  <h2>Recent Work</h2>
+	      </div>
+	      <Card
+	       heading="The Chicago Council on Science and Technology"
+	       body="Graphic design and web development for a science outreach nonprofit organization"
+	      />
+	      <Card
+	       heading="Tuition.io"
+	       body="UX and brand collateral for a student loan repayment benefit platform"
+	      />
+	      <Card
+	       heading="Museum in Trust"
+	       body="Web design and development for Chicago artist Don Pollack "
+	      />
+
+
 	  </div>
-	  
+	  <Moon />
       </div>
     );
   }
