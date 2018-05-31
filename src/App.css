@@ -1,0 +1,179 @@
+html,
+body {
+  position: fixed;
+}
+
+body {
+  background-color #000:
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+.App {
+  //width: 100vw;
+  //height: 100vh;
+  //overflow-y: scroll;
+  //-webkit-overflow-scrolling: touch;
+  //background-attachment: scroll;
+}
+
+// leftover from create-react-app
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.Sea {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  background-image: url("img/noise.png");
+  background-attachment: local;
+}
+
+.Mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  //height: 100vh;
+  // opacity: 0.8;
+  // background-color: cyan;
+  clip-path: inset(63px 16px 16px 16px);
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.World {
+  height: 48px;
+  width: 288px;
+  position: fixed;
+  display: block;
+  top: 16px;
+  left: 16px;
+  border: 1px solid #000;
+  background-color: #fff;
+  z-index: 100;
+}
+
+.Container {
+  width: 288px;
+  position: relative;
+  margin: 0 16px 80px 16px;
+  padding: 63px 8px 8px 8px;
+  //height: calc(100vh - 80px);
+  background-color: #fff;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+  background-image: url("img/dither-1.png");
+  background-repeat: repeat;
+  background-position: top 1px left;
+  background-attachment: local;
+  overflow-y: scroll;
+  // animation: Container-breathe infinite 1s linear;
+}
+
+.Lid {
+  position: fixed;
+  top: 63px;
+  left: 16px;
+  display:block;
+  width: 288px;
+  border-top: 1px solid #000;
+}
+
+@keyframes Container-breathe {
+  from { width: 288px; }
+  50% { width: 296px; }
+  to { width: 288px; }
+}
+
+.DataHeading {
+  background-color: #fff;
+  height: 13px;
+  display: inline-block;
+  margin: 5px 0 0 20px;
+  padding: 6px 6px 0 6px;
+}
+
+.DataHeading * {
+  font-size: 8px;
+  line-height: 2px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 100;
+  margin: 0;
+  position: relative;
+  top: 2px;
+  // animation: Heading-grow infinite 5s linear;
+}
+
+@keyframes Heading-grow {
+  from { letter-spacing: 1px; }
+  50% { letter-spacing: 3px; }
+  to { letter-spacing: 1px; }
+}
+
+.Card {
+  width: 100%;
+  background-color: #fff;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 24px 40px 24px 24px;
+}
+
+.Card h3 {
+  margin: 0;
+}
+
+.browser-window-mobile {
+  position: relative;
+  width: 96px;
+  height: 177px;
+  padding: 10px 1px 0 1px;
+  margin: 32px;
+  /*   background-image: url("img/phone-window-4.png"); */
+  background-repeat: no-repeat;
+  background-size: 96px;
+}
+
+.browser-window-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.img-wrap {
+  width: 94px;
+  height: 166px;
+  -webkit-border-bottom-right-radius: 2px;
+  -webkit-border-bottom-left-radius: 2px;
+  -moz-border-radius-bottomright: 2px;
+  -moz-border-radius-bottomleft: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  overflow: hidden;
+  background-color: transparent;
+  background-image: url("img/screenshot.png");
+  background-repeat: no-repeat;
+  background-size: 94px;
+  background-position: 0 0;
+}
+
+.dither {
+  background-image: url("img/dither-1.png");
+  background-repeat: repeat;
+  background-position: right 1px top 1px;
+}
