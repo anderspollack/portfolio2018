@@ -66,6 +66,7 @@ class World extends Component {
   }
 }
 
+
 class Moon extends Component {
   render() {
     return (
@@ -93,8 +94,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-	  <div className="Sea"></div>
+	  {/* 	  <div className="Sea"></div> */}
 	  <World />
+	  <div className="Shadow"></div>
 	  <div className="Container">
 	      <div className="DataHeading">
 		  <h2>Recent Work</h2>
