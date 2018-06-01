@@ -96,7 +96,6 @@ class App extends Component {
       <div className="App">
 	  {/* 	  <div className="Sea"></div> */}
 	  <World />
-	  <div className="Shadow"></div>
 	  <div className="Container">
 	      <div className="DataHeading">
 		  <h2>Recent Work</h2>
@@ -113,10 +112,9 @@ class App extends Component {
 	       heading="Museum in Trust"
 	       body="Web design and development for Chicago artist Don Pollack "
 	      />
-
-
+	      <Moon />
+	      <div className="Shadow"></div>
 	  </div>
-	  <Moon />
       </div>
     );
   }

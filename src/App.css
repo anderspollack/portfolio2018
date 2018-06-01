@@ -1,13 +1,11 @@
 body {
   background-color: #000;
-  background-image: url("img/noise@2x.png");
-  background-size: 1024px 768px;
+  background-image: url("img/noise.png");
+  background-size: 1024px;
 }
 
-
 .App {
-  /* add extra padding to account for relative positioning of container */
-  padding-bottom: calc(79px + 64px);
+  
 }
 
 // leftover from create-react-app
@@ -49,7 +47,7 @@ body {
   left: 16px;
   border: 1px solid #000;
   background-color: #fff;
-  z-index: 100;
+  z-index: 200;
 }
 
 .Container {
@@ -58,15 +56,13 @@ body {
   top: 63px;
   left: 16px;
   padding: 0 8px 6px 8px;
-  background-color: #fff;
   border: 1px solid #000;
-  background-image: url("img/dither-1@2x.png");
+  background: #fff url("img/dither-1.png") repeat;
   background-size: 16px;
-  background-repeat: repeat;
   background-position: top 1px left;
   background-attachment: local;
   // animation: Container-breathe infinite 1s linear;
- 
+  z-index: 0;
 }
 
 .Moon, .Shadow {
@@ -75,18 +71,19 @@ body {
   position: fixed;
   right: 16px;
   bottom: 16px;
-  /*   background-color: #000; */
-  
 }
 
 .Moon {
-  background-image: url("img/dither-3@2x.png");
+  background-image: url("img/dither-1.png");
   background-size: 16px;
+  height: 48px;
+  z-index: 100;
 }
 
 .Shadow {
-  background-color: #000;
-  content: "";
+  background-image: url("img/dither-5.png");
+  background-size: 16px;
+  z-index: -1;
 }
 
 @keyframes Container-breathe {
@@ -149,7 +146,7 @@ body {
 
 .Card:active {
   /*   background-color: #000; */
-  animation: Card-blacken 0.1s linear alternate;
+  /*   animation: Card-blacken 0.1s linear alternate; */
 }
 
 @keyframes Card-blacken {
@@ -169,10 +166,10 @@ body {
 
 .Card h3 {
   //margin: 0 0 1.6em 0;
-  padding-bottom: 0.4em;
+  padding-bottom: 0.2em;
   display: inline;
   font-size: 11px;
-  line-height: 16px;
+  line-height: 13px;
   font-weight: 700;
   letter-spacing: 0.3px;
   border-bottom: 1px solid transparent;
@@ -232,15 +229,43 @@ body {
 }
 
 /*
- MEDIA QUERIES 
+   MEDIA QUERIES 
  */
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 420px) {
   .World, .Container {
-    width: 368px;
+    width: 388px;
   }
   
   .Container {
     padding: 0 8px 6px 8px;
+  }
+}
+
+/* HD image media queries */
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.25),
+only screen and ( min--moz-device-pixel-ratio: 1.25),
+only screen and ( -o-min-device-pixel-ratio: 1.25/1),
+only screen and ( min-device-pixel-ratio: 1.25),
+only screen and ( min-resolution: 200dpi),
+only screen and ( min-resolution: 1.25dppx)
+{
+  body {
+    background:url("img/noise@2x.png") repeat;
+    background-size: 1024px;
+  }
+
+  .Container {
+    background-image: url("img/dither-1@2x.png");
+
+  }
+
+  .Moon {
+    background-image: url("img/dither-1@2x.png");
+  }
+  
+  .Shadow {
+    background-image: url("img/dither-5@2x.png");
   }
 }
