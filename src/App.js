@@ -4,24 +4,30 @@ const classNames = require('classnames');
 const data = {
   collections: [
     {
-      id: 0,
+      id: 'a',
       heading: 'The Chicago Council on Science and Technology',
       body: 'Graphic design and web development for a science outreach nonprofit organization',
       projects: [
 	{
+	  id: 0,
 	  name: 'C2ST.org Website',
 	  tags: ['Icon-ux', 'Icon-code'],
-	}
+	},
+	{
+	  id: 1,
+	  name: 'C2ST Annual Gala 2015 - 2018',
+	  tags: ['Icon-graphic'],
+	},
       ],
     },
     {
-      id: 1,
+      id: 'b',
       heading: 'Tuition.io',
       body: 'UX and brand collateral for a student loan repayment benefit platform',
       projects: [],
     },
     {
-      id: 2,
+      id: 'c',
       heading: 'Museum in Trust',
       body: 'Web design and development for Chicago artist Don Pollack',
       projects: [],
@@ -29,61 +35,61 @@ const data = {
   ],
 };
 
-class Scroller extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      position: 0,
-      height: 1154,
-    }
-  }
-
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.scroll(),
-      100
-    );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  scroll() {
-    this.setState({
-      position: this.state.position <= this.state.height - 166 ? this.state.position + 1 : 0,
-    });
-  }
-    
-  render() {
-    return (
-      <div
-       className="browser-window-mobile">
-	  <a
-	   href="http://dev.c2st.org/"
-	   target="_blank" rel="noopener noreferrer">
-	  <img 
-	   className="browser-window-background"
-	   src={require('./img/phone-window-medium.png')}
-	   srcSet={`
-${require('./img/phone-window-small.png')} 1x, 
-${require('./img/phone-window-medium.png')} 2x,
-${require('./img/phone-window-large.png')} 3x`}
-	   width="96" 
-	   height="177" 
-	   alt="" 
-	  />
-	  </a>
-          <div className="img-wrap" style={{
-	    backgroundPosition: `0 -${this.state.position}px`,
-	  }}>
-	      
-          </div>
-      </div>
-      
-    )
-  }
-}
+/* class Scroller extends Component {
+ *   constructor(props) {
+ *     super(props);
+ *     this.state = {
+ *       position: 0,
+ *       height: 1154,
+ *     }
+ *   }
+ * 
+ *   componentDidMount() {
+ *     this.timerID = setInterval(
+ *       () => this.scroll(),
+ *       100
+ *     );
+ *   }
+ * 
+ *   componentWillUnmount() {
+ *     clearInterval(this.timerID);
+ *   }
+ * 
+ *   scroll() {
+ *     this.setState({
+ *       position: this.state.position <= this.state.height - 166 ? this.state.position + 1 : 0,
+ *     });
+ *   }
+ *     
+ *   render() {
+ *     return (
+ *       <div
+ *        className="browser-window-mobile">
+ * 	  <a
+ * 	   href="http://dev.c2st.org/"
+ * 	   target="_blank" rel="noopener noreferrer">
+ * 	  <img 
+ * 	   className="browser-window-background"
+ * 	   src={require('./img/phone-window-medium.png')}
+ * 	   srcSet={`
+ * ${require('./img/phone-window-small.png')} 1x, 
+ * ${require('./img/phone-window-medium.png')} 2x,
+ * ${require('./img/phone-window-large.png')} 3x`}
+ * 	   width="96" 
+ * 	   height="177" 
+ * 	   alt="" 
+ * 	  />
+ * 	  </a>
+ *           <div className="img-wrap" style={{
+ * 	    backgroundPosition: `0 -${this.state.position}px`,
+ * 	  }}>
+ * 	      
+ *           </div>
+ *       </div>
+ *       
+ *     )
+ *   }
+ * } */
 
 class World extends Component {
   render() {
@@ -93,7 +99,6 @@ class World extends Component {
   }
 }
 
-
 class Moon extends Component {
   render() {
     return (
@@ -101,29 +106,43 @@ class Moon extends Component {
     );
   }
 }
+
 class TagList extends Component {
   render() {
-    const tags = this.props.tags.map(tag => <li className={tag}></li>);
+    const tags = this.props.tags.map(tag => <li key={ tag } className={ tag }></li>);
     return (
-      <ul className="TagList">{tags}</ul>
+      <ul className="TagList">{ tags }</ul>
     );
   }
 }
 
-class Projects extends Component {
+class Project extends Component {
+  render() {
+    return (
+      <li className="Project" key={ this.props.id }>
+	  <h5>{ this.props.name }</h5>
+	  <TagList tags={ this.props.tags } />
+      </li>
+    );
+  }
+}
+
+class ProjectList extends Component {
   render() {
     const projects = this.props.projects.map(project => {
       return (
-	<li>
-	    <h5>{project.name}</h5>
-	    <TagList tags={project.tags} />
-	</li>
-      );
+	<Project
+	 key={ project.id }
+	 id={ project.id }
+	 name={ project.name }
+	 tags={ project.tags }
+	/>
+      ); 
     });
     return (
-      <div className="Projects">
+      <div className="ProjectList">
 	  <h4>Projects</h4>  
-	  <ul className="Projects">{ projects }</ul>
+	  <ul>{	projects }</ul>
       </div>
     );
   }
@@ -142,12 +161,10 @@ class Card extends Component {
     this.setState({
       expanded: !this.state.expanded,
     });
-    console.log(this.state.expanded);
   }
   
   render() {
-    let selected
-    let classList = classNames(
+    const classList = classNames(
       'Card',
       'Button',
       { 'Expanded': this.state.expanded },
@@ -156,11 +173,13 @@ class Card extends Component {
       <li>
 	  <a
 	   href="#"
-	   className={classList}
-	   onClick={this.expand}>
-	      <h3>{ this.props.heading }</h3>
-	      <p>{ this.props.body }</p>
-	      <Projects projects={ this.props.projects } />
+	   className={ classList }
+	   onClick={ this.expand }>
+	      <div className="excerpt">
+		  <h3>{ this.props.heading }</h3>
+		  <p>{ this.props.body }</p>
+	      </div>
+	      <ProjectList projects={ this.props.projects } />
 	  </a>
       </li>
     )
@@ -179,11 +198,12 @@ class Container extends Component {
     const cards = this.state.cards.map(card => {
       return (
 	<Card
-	 id={card.id}
-	 heading={card.heading}
-	 body={card.body}
-	 projects={card.projects}
-	 onclick={() => this.setState({ selected: card.id })} /> 
+	 key={ card.id }
+	 id={ card.id }
+	 heading={ card.heading }
+	 body={ card.body }
+	 projects={ card.projects }
+	/> 
       );
     });
     
@@ -192,7 +212,7 @@ class Container extends Component {
 	  <div className="DataHeading">
 	      <h2>Recent Work</h2>
 	  </div>
-	  <ul>{cards}</ul>
+	  <ul>{ cards }</ul>
 	  <Moon />
 	  <div className="Shadow"></div>
       </div>

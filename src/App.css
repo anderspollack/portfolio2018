@@ -109,30 +109,27 @@ body {
   margin: 0;
   position: relative;
   top: 2px;
-  // animation: Heading-grow infinite 5s linear;
 }
 
-@keyframes Heading-grow {
-  from { letter-spacing: 1px; }
-  50% { letter-spacing: 3px; }
-  to { letter-spacing: 1px; }
-}
+/* ######### */
+/* # CARDS # */
+/* ######### */
 
 .Card {
+  position: relative;
   background-color: #fff;
-  -webkit-border-radius: 24px;
-  -moz-border-radius: 24px;
-  border-radius: 24px;
-  padding: 24px 40px 24px 24px;
-  margin-bottom: 2px;
-  animation: Card-release 0.3s ease-out;
-  animation-delay: 0.2s;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 6px;
+  animation: Card-release 0.1s ease-out;
   animation-fill-mode: forwards;
 }
 
 @keyframes Card-release {
   from { border-radius: 24px; }
-  to { border-radius: 12px; }
+  to { border-radius: 8px; }
 }
 
 .Card:hover {
@@ -140,29 +137,15 @@ body {
 }
 
 @keyframes Card-squeeze {
-  from { border-radius: 12px; }
+  from { border-radius: 8px; }
   to { border-radius: 24px; }
 }
 
-.Card:active {
-  /*   background-color: #000; */
-  /*   animation: Card-blacken 0.1s linear alternate; */
+.Expanded.Card {
+  padding-bottom: 48px;
 }
 
-@keyframes Card-blacken {
-  from {
-    -webkit-border-radius: 24px;
-    -moz-border-radius: 24px;
-    border-radius: 24px;
-    background-color: #fff;
-  }
-  to {
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
-    background-color: #000;
-  }
-}
+/* CARD TYPE STYLES */
 
 .Card h3 {
   //margin: 0 0 1.6em 0;
@@ -191,30 +174,103 @@ body {
   letter-spacing: 0.3px;
 }
 
-.Projects {
+.Expanded.Card .excerpt, .ProjectList h4 {
+  margin-left: 32px;
+}
+
+/* FOLDER ICON | DOTTED LINE */
+
+.ProjectList::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  width: 32px;
+  height: calc(100% - 24px - 58px);
+  background: url("img/icon-folder@2x.png") no-repeat, 
+  url("img/dither-1-vertical-line.png") repeat-y;
+  background-size: 32px, 1px;
+  background-position: 0 0, 7px 0;
+  animation: Marching-dots 0.5s infinite step-end;
+}
+
+@keyframes Marching-dots {
+  from {
+    background-position: 0 0, 7px 0;
+  }
+  25% {
+    background-position: 0 0, 7px 1px;
+  }
+  50% {
+    background-position: 0 0, 7px 2px;
+  }
+  75% {
+    background-position: 0 0, 7px 3px;
+  }
+  to {
+    background-position: 0 0, 7px 4px;
+  }
+}
+
+/* ############ */
+/* # PROJECTS # */
+/* ############ */
+
+.ProjectList {
   display: none;
 }
 
-.Expanded .Projects {
+.Expanded.Card .ProjectList {
   display: block;
+  width: calc(100vw - 113px);
 }
 
-.Projects h4 {
-  display: inline;
-  margin-top: 24px;
+.Expanded.Card .ProjectList > ul {
+  display: block;
+  -webkit-border-top-right-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -webkit-border-bottom-left-radius: 12px;
+  -moz-border-radius-topright: 8px;
+  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius-bottomleft: 12px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 12px;
+  background: url("img/dither-1.png") repeat;
+  background-size: 16px;
+  background-position: top 1px left;
+  margin-left: 0;
+  padding: 2px 2px 0 8px;
+}
+
+.Project {
+  display: inline-block;
+  padding: 16px 16px 20px 24px;
+  margin: 0 3px 2px 0;
+  width: 100%;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+.ProjectList h4 {
+  margin-top: 16px;
+  margin-bottom: 24px;
+  font-weight: 100;
   font-size: 8px;
   line-height: 9px;
   letter-spacing: 1px;
-  font-weight: 100;
-  margin: 0;
   text-transform: uppercase;
 }
 
-.Projects h5 {
-  margin-top: 16px;
+.Project h5 {
+  margin-top: 0;
   margin-bottom: 8px;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 400;
+  letter-spacing: 0.4px;
   line-height: 13px
 }
 
@@ -245,6 +301,7 @@ body {
   background-image: url("img/icon-studio.png");
 }
 
+/* SCROLLING WEBSITE THUMBNAIL */
 
 .browser-window-background {
   position: absolute;
@@ -269,12 +326,6 @@ body {
   background-position: 0 0;
 }
 
-.dither {
-  background-image: url("img/dither-1.png");
-  background-repeat: repeat;
-  background-position: right 1px top 1px;
-}
-
 /* UTILITY CLASSES */
 
 .Button {
@@ -283,9 +334,11 @@ body {
   color: #000;
 }
 
-/*
-   MEDIA QUERIES 
- */
+/* ################# */
+/* # MEDIA QUERIES # */
+/* ################# */
+
+/* LAYOUT */
 
 @media screen and (min-width: 420px) {
   .World, .Container {
@@ -295,9 +348,18 @@ body {
   .Container {
     padding: 0 8px 6px 8px;
   }
+  
+  .Expanded.Card .ProjectList {
+    width: calc(100% - 12px);
+  }
+
+  .Project {
+    width: 300px; 
+  }
 }
 
-/* HD image media queries */
+/* HD IMAGES FOR HD SCREENS */
+
 @media
 only screen and (-webkit-min-device-pixel-ratio: 1.25),
 only screen and ( min--moz-device-pixel-ratio: 1.25),
@@ -311,18 +373,14 @@ only screen and ( min-resolution: 1.25dppx)
     background-size: 1024px;
   }
 
-  .Container {
-    background-image: url("img/dither-1@2x.png");
-
-  }
-
-  .Moon {
+  .Container, .Moon, .Expanded.Card .ProjectList > ul {
     background-image: url("img/dither-1@2x.png");
   }
-  
+
   .Shadow {
     background-image: url("img/dither-5@2x.png");
   }
+
 
   .Icon-ux {
     background-image: url("img/icon-ux@2x.png");
@@ -331,13 +389,20 @@ only screen and ( min-resolution: 1.25dppx)
   .Icon-code {
     background-image: url("img/icon-code@2x.png");
   }
+
   .Icon-graphic {
     background-image: url("img/icon-graphic@2x.png");
   }
+
   .Icon-sound {
     background-image: url("img/icon-sound@2x.png");
   }
+
   .Icon-studio {
     background-image: url("img/icon-studio@2x.png");
+  }
+
+  .ProjectList::before {
+    background-image: url("img/icon-folder@2x.png") no-repeat, url("img/dither-1-vertical-line@2x.png") repeat-y;
   }
 }
