@@ -12,3 +12,8 @@ body {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
