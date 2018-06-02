@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 const classNames = require('classnames');
 const data = {
-  projects: [
+  collections: [
     {
       id: 0,
       heading: 'The Chicago Council on Science and Technology',
       body: 'Graphic design and web development for a science outreach nonprofit organization',
-      directory: [
+      projects: [
 	{
 	  name: 'C2ST.org Website',
 	  tags: ['Icon-ux', 'Icon-code'],
@@ -18,13 +18,13 @@ const data = {
       id: 1,
       heading: 'Tuition.io',
       body: 'UX and brand collateral for a student loan repayment benefit platform',
-      directory: [],
+      projects: [],
     },
     {
       id: 2,
       heading: 'Museum in Trust',
       body: 'Web design and development for Chicago artist Don Pollack',
-      directory: [],
+      projects: [],
     },
   ],
 };
@@ -101,22 +101,29 @@ class Moon extends Component {
     );
   }
 }
-
-class Directory extends Component {
+class TagList extends Component {
   render() {
-    const listings = this.props.directory.map(listing => {
+    const tags = this.props.tags.map(tag => <li className={tag}></li>);
+    return (
+      <ul className="TagList">{tags}</ul>
+    );
+  }
+}
+
+class Projects extends Component {
+  render() {
+    const projects = this.props.projects.map(project => {
       return (
 	<li>
-	    {listing.name}
-	    <br />
-	    {listing.tags.map(tag => `${tag}, `)}
+	    <h5>{project.name}</h5>
+	    <TagList tags={project.tags} />
 	</li>
       );
     });
-    
     return (
-      <div className="Directory">
-	  <ul>{listings}</ul>
+      <div className="Projects">
+	  <h4>Projects</h4>  
+	  <ul className="Projects">{ projects }</ul>
       </div>
     );
   }
@@ -139,7 +146,8 @@ class Card extends Component {
   }
   
   render() {
-    const classList = classNames(
+    let selected
+    let classList = classNames(
       'Card',
       'Button',
       { 'Expanded': this.state.expanded },
@@ -152,10 +160,10 @@ class Card extends Component {
 	   onClick={this.expand}>
 	      <h3>{ this.props.heading }</h3>
 	      <p>{ this.props.body }</p>
-	      <Directory directory={ this.props.directory } />
+	      <Projects projects={ this.props.projects } />
 	  </a>
       </li>
-    );
+    )
   }
 }
 
@@ -163,7 +171,7 @@ class Container extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: data.projects,
+      cards: data.collections,
     }
   }
   
@@ -174,7 +182,7 @@ class Container extends Component {
 	 id={card.id}
 	 heading={card.heading}
 	 body={card.body}
-	 directory={card.directory}
+	 projects={card.projects}
 	 onclick={() => this.setState({ selected: card.id })} /> 
       );
     });

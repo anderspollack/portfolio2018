@@ -191,13 +191,60 @@ body {
   letter-spacing: 0.3px;
 }
 
-.Directory {
+.Projects {
   display: none;
 }
 
-.Expanded .Directory {
+.Expanded .Projects {
   display: block;
 }
+
+.Projects h4 {
+  display: inline;
+  margin-top: 24px;
+  font-size: 8px;
+  line-height: 9px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.Projects h5 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px
+}
+
+.TagList li {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-size: 32px;
+}
+
+.Icon-ux {
+  background-image: url("img/icon-ux.png");
+}
+
+.Icon-code {
+  background-image: url("img/icon-code.png");
+}
+
+.Icon-graphic {
+  background-image: url("img/icon-graphic.png");
+}
+
+.Icon-sound {
+  background-image: url("img/icon-sound.png");
+}
+
+.Icon-studio {
+  background-image: url("img/icon-studio.png");
+}
+
 
 .browser-window-background {
   position: absolute;
@@ -275,5 +322,22 @@ only screen and ( min-resolution: 1.25dppx)
   
   .Shadow {
     background-image: url("img/dither-5@2x.png");
+  }
+
+  .Icon-ux {
+    background-image: url("img/icon-ux@2x.png");
+  }
+
+  .Icon-code {
+    background-image: url("img/icon-code@2x.png");
+  }
+  .Icon-graphic {
+    background-image: url("img/icon-graphic@2x.png");
+  }
+  .Icon-sound {
+    background-image: url("img/icon-sound@2x.png");
+  }
+  .Icon-studio {
+    background-image: url("img/icon-studio@2x.png");
   }
 }
