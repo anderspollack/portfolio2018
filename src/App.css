@@ -2,6 +2,7 @@ body {
   /*   background-color: #000; */
   background-image: url("img/noise.png");
   background-size: 1024px;
+  padding-bottom: 80px;
 }
 
 .App {
@@ -41,21 +42,28 @@ body {
 
 .World {
   height: 48px;
-  width: calc(100vw - 32px);
+  width: 48px;
   position: fixed;
-  top: 0px;
-  left: 16px;
+  z-index: 200;
   border: 1px solid #000;
   background-color: #fff;
-  z-index: 200;
+  top: 0px;
+  left: 0px;
+  /*   background: url() no-repeat 8px 8px; */
+}
+
+.World.expanded {
+  width: calc(100vw - 32px);
+  top: 0px;
+  left: 16px;
 }
 
 .Container {
   width: calc(100vw - 32px);
   position: relative;
-  top: 63px;
+  top: 64px;
   left: 16px;
-  padding: 0 8px 6px 8px;
+  padding: 0 8px 2px 8px;
   border: 1px solid #000;
   background: #fff url("img/dither-1.png") repeat;
   background-size: 16px;
@@ -63,6 +71,11 @@ body {
   background-attachment: local;
   // animation: Container-breathe infinite 1s linear;
   z-index: 0;
+  margin-bottom: 64px;
+}
+
+.Container.hidden {
+  left: -400px;
 }
 
 .Moon, .Shadow {
@@ -74,7 +87,7 @@ body {
 }
 
 .Moon {
-  background-image: url("img/dither-1.png");
+  background-image: url("img/dither-2.png");
   background-size: 16px;
   height: 48px;
   z-index: 100;
@@ -123,25 +136,19 @@ body {
   border-radius: 8px;
   padding: 24px;
   margin-bottom: 6px;
-  animation: Card-release 0.1s ease-out;
-  animation-fill-mode: forwards;
-}
-
-@keyframes Card-release {
-  from { border-radius: 24px; }
-  to { border-radius: 8px; }
 }
 
 .Card:hover {
-  animation: Card-squeeze 0.1s linear forwards;
+  transition:
+    -webkit-border-radius 0.1s ease-out,
+    -moz-border-radius 0.1s ease-out,
+    border-radius 0.1s ease-out;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  border-radius: 24px;
 }
 
-@keyframes Card-squeeze {
-  from { border-radius: 8px; }
-  to { border-radius: 24px; }
-}
-
-.Expanded.Card {
+.Card.expanded {
   padding-bottom: 48px;
 }
 
@@ -174,42 +181,53 @@ body {
   letter-spacing: 0.3px;
 }
 
-.Expanded.Card .excerpt, .ProjectList h4 {
+.Card.expanded .excerpt, .ProjectList h4 {
   margin-left: 32px;
 }
 
 /* FOLDER ICON | DOTTED LINE */
+.CollectionButton {
+  background-size: 32px;
+  background-repeat: no-repeat;
+  height: 32px;
+}
 
-.ProjectList::before {
-  content: "";
+.CollectionButton, .ProjectList::before {
   display: block;
   position: absolute;
   top: 24px;
   left: 16px;
   width: 32px;
-  height: calc(100% - 24px - 58px);
-  background: url("img/icon-folder@2x.png") no-repeat, 
-  url("img/dither-1-vertical-line.png") repeat-y;
-  background-size: 32px, 1px;
-  background-position: 0 0, 7px 0;
-  animation: Marching-dots 0.5s infinite step-end;
+}
+
+.Icon-folder {
+  background-image: url("img/icon-folder.png");
+}
+
+.ProjectList::before {
+  content: "";
+  height: calc(100% - 24px - 56px);
+  background: url("img/dither-1-vertical-line.png") repeat-y;
+  background-size: 1px;
+  background-position: 8px 0;
+  animation: Marching-dots 1s infinite step-end;
 }
 
 @keyframes Marching-dots {
   from {
-    background-position: 0 0, 7px 0;
+    background-position: 8px 0;
   }
   25% {
-    background-position: 0 0, 7px 1px;
+    background-position: 8px 1px;
   }
   50% {
-    background-position: 0 0, 7px 2px;
+    background-position: 8px 2px;
   }
   75% {
-    background-position: 0 0, 7px 3px;
+    background-position: 8px 3px;
   }
   to {
-    background-position: 0 0, 7px 4px;
+    background-position: 8px 4px;
   }
 }
 
@@ -221,38 +239,79 @@ body {
   display: none;
 }
 
-.Expanded.Card .ProjectList {
+.Card.expanded .ProjectList {
   display: block;
   width: calc(100vw - 113px);
 }
 
-.Expanded.Card .ProjectList > ul {
+.Card.expanded .ProjectList > ul {
   display: block;
-  -webkit-border-top-right-radius: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -webkit-border-bottom-left-radius: 12px;
-  -moz-border-radius-topright: 8px;
-  -moz-border-radius-bottomright: 8px;
-  -moz-border-radius-bottomleft: 12px;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  border-bottom-left-radius: 12px;
+  -webkit-border-radius: 8px;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius: 8px;
+  -moz-border-radius-topleft: 0;
+  border-radius: 8px;
+  border-top-left-radius: 0;
   background: url("img/dither-1.png") repeat;
   background-size: 16px;
-  background-position: top 1px left;
   margin-left: 0;
-  padding: 2px 2px 0 8px;
+  padding: 1px 2px 1px 8px;
 }
 
 .Project {
-  display: inline-block;
-  padding: 16px 16px 20px 24px;
-  margin: 0 3px 2px 0;
   width: 100%;
+  background-color: #fff;
+  padding: 16px 16px 20px 24px;
+}
+
+.Project.selected {
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.Project.selected * {
+  display: none;
+}
+
+.Project:hover {
+  transition:
+    -webkit-border-radius 0.1s ease-out,
+    -moz-border-radius 0.1s ease-out,
+    border-radius 0.1s ease-out;
+  -webkit-border-radius: 32px;
+  -moz-border-radius: 32px;
+  border-radius: 32px;
+}
+
+.Project, .Project.selected::before {
+  display: block;
+  margin: 2px 0 1px 0;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+}
+
+/* animation placeholder for project */
+.Project.selected::before {
   background-color: #fff;
+  position: fixed;
+  content: "";
+  margin-top: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.Container.hidden .Project.selected::before {
+  top: 64px;
+  left: 16px;
+  height: calc(100% - 80px);
+  width: calc(100% - 32px);
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 1px solid #000;
 }
 
 .ProjectList h4 {
@@ -301,6 +360,59 @@ body {
   background-image: url("img/icon-studio.png");
 }
 
+/* ################ */
+/* # PROJECT VIEW # */
+/* ################ */
+
+.ProjectView {
+  position: fixed;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 100vw;
+  height: 100vh;
+  padding: 16px;
+}
+
+.ProjectPage {
+  background: #fff;
+  border: 1px solid #000;
+  margin-bottom: 64px;
+  position: relative;
+  padding: 24px;
+  /*   left: -100px; */
+}
+
+.PreviousButton, .NextButton {
+  position: fixed;
+  width: 48px;
+  height: 96px;
+  bottom: 80px;
+  background: #fff;
+  border: 1px solid #000;
+  z-index: 200;
+}
+.PreviousButton .text, .NextButton .text {
+  display: block;
+  position: relative;
+  top: 48px;
+} 
+
+.PreviousButton {
+  left: 0;
+}
+
+.PreviousButton .text {
+  transform: rotate(-90deg);
+}
+
+.NextButton {
+  right: 0;
+}
+
+.NextButton .text {
+  transform: rotate(90deg);
+}
+
 /* SCROLLING WEBSITE THUMBNAIL */
 
 .browser-window-background {
@@ -341,20 +453,20 @@ body {
 /* LAYOUT */
 
 @media screen and (min-width: 420px) {
-  .World, .Container {
+  .World.expanded, .Container {
     width: 388px;
   }
   
-  .Container {
-    padding: 0 8px 6px 8px;
-  }
-  
-  .Expanded.Card .ProjectList {
+  .Card.expanded .ProjectList {
     width: calc(100% - 12px);
   }
 
   .Project {
     width: 300px; 
+  }
+
+  .Container.hidden .Project.selected::before {
+    width: calc(420px - 32px);
   }
 }
 
@@ -373,8 +485,12 @@ only screen and ( min-resolution: 1.25dppx)
     background-size: 1024px;
   }
 
-  .Container, .Moon, .Expanded.Card .ProjectList > ul {
+  .Container, .Card.expanded .ProjectList > ul {
     background-image: url("img/dither-1@2x.png");
+  }
+
+  .Moon {
+    background-image: url("img/dither-2@2x.png");
   }
 
   .Shadow {
