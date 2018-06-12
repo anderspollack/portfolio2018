@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import { C2STWebsite, C2STGala } from './projects.js';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 const classNames = require('classnames');
 const data = {
   collections: [
@@ -13,6 +15,7 @@ const data = {
 	  id: 0,
 	  name: 'C2ST.org Website',
 	  tags: ['Icon-ux', 'Icon-code'],
+	  content: './projects/c2st-website.js',
 	},
 	{
 	  id: 1,
@@ -94,20 +97,15 @@ const data = {
 
 
 class World extends Component {
-  onClick = (e) => {
-    this.props.onClick(e)
-  }
-  
   render() {
     const classList = classNames(
       { 'World': true },
-      { 'expanded': this.props.expanded }
+      { 'expanded': this.props.expanded },
+      { 'collapsed': !this.props.home && !this.props.expanded },
+      { 'home': this.props.home },
     );
     return (
-      <div
-       className={ classList }
-       onClick={ this.onClick }  
-      ></div>
+      <div className={ classList } ></div>
     );
   }
 }
@@ -244,6 +242,7 @@ class Card extends Component {
     const classList = classNames(
       {'Card': true},
       {'expanded': expanded });
+    console.log(this, ' is this');
     return (
       <li
        className={ classList }
@@ -305,6 +304,9 @@ class ProjectView extends Component {
 	  <div className="ProjectPage">
 
 	      <h2>{ project.name }</h2>
+	      
+	      <C2STWebsite />
+	      <C2STGala />
 	      
 	      <p>Augue eget arcu dictum varius duis at consectetur lorem donec massa sapien, faucibus et molestie. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in.</p>
 	      <p>Quam id leo in vitae turpis massa sed elementum! Scelerisque in dictum non, consectetur a erat nam at lectus urna duis convallis convallis tellus, id interdum velit laoreet id donec.</p>
@@ -393,17 +395,32 @@ class App extends Component {
     });
     return (
       <div className="App">
-	  <World expanded={ this.state.worldExpanded } onClick={ this.handleCollectionListExpand } />
-	  { this.state.collectionListExpanded &&
-	    <Container>
-		<Moon />
-		<DataHeading heading="Recent Work" />
-		<ul className="CardList">
-		    { cards }
-		</ul>
-		<div className="Shadow"></div>
-	    </Container>
-	  }
+	  <Router>
+	      <div>
+		  <Route exact={ true } path="/" render={() => (
+		    <div className="Void">
+			<Link to="/collections">
+			    <World home={ true } />
+			</Link>
+		    </div>
+		  )} />
+		  <Route exact={ true } path="/collections" render={() => (
+		    <div>
+			<Link to="/">
+			    <World expanded={ true } />
+			</Link>
+			<Container>
+			    <Moon />
+			    <DataHeading heading="Recent Work" />
+			    <ul className="CardList">
+				{ cards }
+			    </ul>
+			    <div className="Shadow"></div>
+			</Container>
+		    </div>
+		  )} />
+	      </div>
+	  </Router>
 	  { this.state.projectViewEnabled &&
 	    <ProjectView
 	     selectedProject={ this.state.selectedProject }

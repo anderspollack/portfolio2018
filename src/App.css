@@ -2,11 +2,12 @@ body {
   /*   background-color: #000; */
   background-image: url("img/noise.png");
   background-size: 1024px;
-  padding-bottom: 80px;
+  /*   padding-bottom: 80px; */
 }
 
 .App {
-  
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 // leftover from create-react-app
@@ -40,22 +41,41 @@ body {
   to { background-position: top 2px left 2px; }
 }
 
+.Void {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  
+}
+
 .World {
   height: 48px;
   width: 48px;
   position: fixed;
   z-index: 200;
-  border: 1px solid #000;
   background-color: #fff;
-  top: 0px;
-  left: 0px;
-  /*   background: url() no-repeat 8px 8px; */
+  top: 80px;
+  left: 80px;
+  background-image: url("img/icon-world.png");
+  background-size: 32px;
+  background-repeat: no-repeat;
+  background-position: 7px 7px;
+}
+
+.World.expanded, .World.collapsed {
+  border: 1px solid #000;
 }
 
 .World.expanded {
   width: calc(100vw - 32px);
   top: 0px;
   left: 16px;
+}
+
+.World.collapsed {
+  top: 0px;
+  left: 0px;
 }
 
 .Container {
@@ -378,7 +398,7 @@ body {
   border: 1px solid #000;
   margin-bottom: 64px;
   position: relative;
-  padding: 24px;
+  padding: 40px;
   /*   left: -100px; */
 }
 
@@ -411,6 +431,14 @@ body {
 
 .NextButton .text {
   transform: rotate(90deg);
+}
+
+/* PROJECT PAGE TYPE STYLES */
+
+.ProjectPage p {
+  font-size: 9px;
+  line-height: 11px;
+  letter-spacing: 0.3px;
 }
 
 /* SCROLLING WEBSITE THUMBNAIL */
@@ -489,6 +517,10 @@ only screen and ( min-resolution: 1.25dppx)
     background-image: url("img/dither-1@2x.png");
   }
 
+  .World {
+    background-image: url("img/icon-world@2x.png")
+  }
+  
   .Moon {
     background-image: url("img/dither-2@2x.png");
   }
@@ -496,7 +528,6 @@ only screen and ( min-resolution: 1.25dppx)
   .Shadow {
     background-image: url("img/dither-5@2x.png");
   }
-
 
   .Icon-ux {
     background-image: url("img/icon-ux@2x.png");
@@ -519,6 +550,6 @@ only screen and ( min-resolution: 1.25dppx)
   }
 
   .ProjectList::before {
-    background-image: url("img/icon-folder@2x.png") no-repeat, url("img/dither-1-vertical-line@2x.png") repeat-y;
+    background-image: url("img/icon-folder@2x.png") no-repeat, url("img/dither-1-vertical-line@2x.png");
   }
 }
