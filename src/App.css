@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
 
 body {
   /*   background-color: #000; */
@@ -144,10 +144,6 @@ body {
 }
 
 /* ICONS */
-.World {
-  background-image: url("img/icon-world.png");
-}
-
 .Icon-folder {
   background-image: url("img/icon-folder.png");
 }
@@ -170,6 +166,10 @@ body {
 
 .Icon-studio {
   background-image: url("img/icon-studio.png");
+}
+
+.Icon-presentation {
+  background-image: url("img/icon-presentation.png");
 }
 
 /* DITHER PATTERNS */
@@ -202,10 +202,6 @@ only screen and ( min-resolution: 1.25dppx)
     background: url("img/dither-1@2x.png") repeat;
   }
   
-  .World {
-    background-image: url("img/icon-world@2x.png");
-  }
-  
   .Moon {
     background-image: url("img/dither-2@2x.png");
   }
@@ -236,6 +232,10 @@ only screen and ( min-resolution: 1.25dppx)
 
   .Icon-folder {
     background-image: url("img/icon-folder@2x.png");
+  }
+
+  .Icon-presentation {
+    background-image: url("img/icon-presentation@2x.png");
   }
 
   .ProjectList::before {

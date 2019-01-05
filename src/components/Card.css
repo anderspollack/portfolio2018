@@ -1,0 +1,271 @@
+.Card {
+  position: relative;
+  background-color: #fff;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 6px;
+}
+
+.Card:hover {
+  transition:
+    -webkit-border-radius 0.15s ease-out,
+    -moz-border-radius 0.15s ease-out,
+    border-radius 0.15s ease-out;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  border-radius: 24px;
+}
+
+.Card.expanded {
+  padding-bottom: 28px;
+  /*   transition: padding 0.1s ease-in 0.2s; */
+}
+
+/* CARD TYPE STYLES */
+
+.Card h3 {
+  width: calc(100% - 24px);
+  /*   padding-top: 3px; */
+  margin-top: 0;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  border-top: 1px solid transparent;
+}
+
+/* .Card:hover h3 {
+   border-color: #000;
+   transition: 0.1s ease-in;
+   } */
+
+.Card p {
+  font-size: 10px;
+  line-height: 13px;
+  letter-spacing: 0.5px;
+}
+
+.Card .excerpt {
+  cursor: pointer;
+  margin-left: 0;
+  transition: margin-left 0.1s ease-in;
+}
+
+.Card.expanded .excerpt p {
+  display: none;
+}
+
+.Card.expanded .excerpt,
+.ProjectList h4,
+.Card.expanded > .TagList {
+  margin-left: 32px;
+}
+
+.Card > .TagList {
+  max-height: 1000px;
+  margin-top: 16px;
+  margin-left: 0px;
+  opacity: 1;
+  transition:
+    max-height 0.1s ease-out,
+    opacity 0.1s ease-out,
+    margin-left 0.1s ease-in;
+}
+
+.Card.expanded > .TagList {
+  position: absolute;
+  max-height: 0px;
+  opacity: 0;
+  /* transition:
+     max-height 0.2s ease-out,
+     opacity 0.2s ease-out,
+     margin-left 0.2s ease; */
+}
+
+/* FOLDER ICON | DOTTED LINE */
+.CollectionButton {
+  background-size: 32px;
+  background-repeat: no-repeat;
+  height: 32px;
+}
+
+.CollectionButton, .ProjectList::before {
+  display: block;
+  position: absolute;
+  top: 24px;
+  left: 16px;
+  width: 40px;
+}
+
+.CollectionButton {
+  animation: CollectionButton-appear 1 0.2s linear;
+  cursor: pointer;
+}
+
+@keyframes CollectionButton-appear {
+  from {
+    opacity: 0;
+    top: 20px;
+  }
+  50% {
+    opacity: 0;
+    top: 20px;
+  }
+  to {
+    opacity: 1;
+    top: 24px;
+  }
+}
+
+.ProjectList::before {
+  content: "";
+  height: calc(100% - 54px);
+  background-repeat: repeat-y;
+  background-size: 1px;
+  background-position: 8px 0;
+  animation: Marching-dots-slide-in 1 0.4s ease-in, Marching-dots 1.2s 16 ease-in-out 0.3s;
+}
+
+@keyframes Marching-dots-slide-in {
+  from {
+    opacity: 0;
+    height: 0px;
+  }
+  50% {
+    opacity: 0;
+    height: 0px;
+  }
+  to {
+    opacity: 1;
+    height: calc(100% - 54px);
+  }
+}
+
+@keyframes Marching-dots {
+  from {
+    /* fixes flickering markup in Safari dev tools */
+    content: "";
+    background-position: 8px 0;
+  }
+  25% {
+    background-position: 8px 1px;
+  }
+  50% {
+    background-position: 8px 2px;
+  }
+  75% {
+    background-position: 8px 3px;
+  }
+  to {
+    content: "";
+    background-position: 8px 4px;
+  }
+}
+
+.cancel {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  background-image: url("../img/arrow-down.png");
+  background-size: 16px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.Card.expanded .cancel {
+  transform: rotate(180deg);
+}
+
+/* ############ */
+/* # PROJECTS # */
+/* ############ */
+
+.ProjectList {
+  overflow: hidden;
+  display: block;
+  /*   width: calc(100vw - 82px); */
+  /*   max-height: 1000px; */
+}
+
+.ProjectList h4 {
+  margin-top: 16px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  animation: heading-slide-in-left 0.4s ease-in;
+}
+
+@keyframes heading-slide-in-left {
+  from {
+    left: -8px;
+    opacity: 0;
+  }
+  50% {
+    left: -8px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.ProjectList > ul {
+  display: block;
+  overflow: hidden;
+  background-repeat: repeat;
+  background-size: 16px;
+  margin-left: 0;
+  /*   padding: 1px 2px 1px 2px; */
+  padding: 0 4px 2px 0;
+  animation: ProjectList-expand 1 0.4s ease-in;
+}
+
+@keyframes ProjectList-expand {
+  from {
+    opacity: 0;
+    max-height: 0px;
+  }
+  50% {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .ProjectList > ul {
+    padding: 0 0 2px 0; 
+  }
+}
+
+@media screen and (min-width: 420px) {
+  .Card.expanded .ProjectList {
+    width: 100%;
+    display: inline;
+  }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.25),
+only screen and ( min--moz-device-pixel-ratio: 1.25),
+only screen and ( -o-min-device-pixel-ratio: 1.25/1),
+only screen and ( min-device-pixel-ratio: 1.25),
+only screen and ( min-resolution: 200dpi),
+only screen and ( min-resolution: 1.25dppx)
+{
+  .cancel {
+    background-image: url("../img/arrow-down@2x.png");
+  }
+}

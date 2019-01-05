@@ -1,29 +1,28 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 /* import { CSSTransition } from 'react-transition-group'; */
 import './App.css';
 import World from './components/World';
 import ProjectNav from './components/ProjectNav';
 import ProjectPage from './components/ProjectPage';
-const classNames = require('classnames');
 const data = {
   collections: [{
     id: 0,
     heading: 'The Chicago Council on Science and Technology',
-    body: 'Graphic design and web development for a science outreach nonprofit organization',
+    body: 'Graphic design and web development for a nonprofit organization that promotes science education and outreach',
     icon: 'Icon-folder',
     projects: [
       {
         id: 'c2st-website',
         title: 'C2ST.org Website',
-        tags: ['Icon-ux', 'Icon-code'],
+        tags: ['Icon-ux', 'Icon-code', 'Icon-graphic'],
       }, {
         id: 'c2st-programming',
         title: 'C2ST Event Collateral 2015 - 2018',
         tags: ['Icon-graphic', 'Icon-code'],
       }, {
         id: 'c2st-newsletter',
-        title: 'C2ST Annual Newsletter 2015 - 2018',
+        title: 'C2ST Annual Newsletter 2015 - 2017',
         tags: ['Icon-graphic'],
       }, /* {
             id: 'c2st-programs',
@@ -34,16 +33,20 @@ const data = {
   }, {
     id: 1,
     heading: 'Tuition.io',
-    body: 'UX and brand collateral for a student loan repayment benefit platform',
+    body: 'Product design and brand collateral for a student loan repayment benefit B2B platform',
     projects: [
       {
         id: 'tio-portal',
         title: 'Tuition.io Employee Portal',
         tags: ['Icon-ux'],
       }, {
+        id: 'tio-email',
+        title: 'Tuition.io Email Templates',
+        tags: ['Icon-code'],
+      }, {
         id: 'tio-collateral',
         title: 'Tuition.io Brand Collateral',
-        tags: ['Icon-graphic', 'Icon-code'],
+        tags: ['Icon-graphic', 'Icon-presentation'],
       }, 
     ]
   }, {
@@ -108,6 +111,15 @@ class App extends Component {
       );
     }
   }
+
+  handleNavButtonClick = (projectLink, history) => {
+    this.setState(() => (
+      {
+        selectedProject: projectLink,
+      }),
+      () => history.push(projectLink)
+    );
+  }
   
   render() {
     return (
@@ -129,7 +141,7 @@ class App extends Component {
                    <ProjectPage {...props}
                      project={ this.state.selectedProject }
                      projects={ this.state.projects }
-                     exit={ !this.state.projectPage }/>
+                     onNavButtonClick={ this.handleNavButtonClick }/>
                  )}/>
             </div>
           )}/>

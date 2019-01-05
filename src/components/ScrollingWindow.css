@@ -1,0 +1,130 @@
+/* SCROLLING SCREENSHOTS */
+
+.titleBar {
+  /*   content: ''; */
+  position: absolute;
+  height: 15px;
+  width: calc(65vw);
+  z-index: 150;
+  border: 1px solid #000;
+  background-image: url('../img/dither-1.png');
+  background-size: 16px;
+  background-position: 0 1px;
+}
+
+.ScrollingWindow {
+  border: 1px solid #000;
+  max-width: 65vw;
+  max-height: 65vh;
+  width: auto;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+}
+
+.scrollText {
+  position: relative;
+  top: calc(65vh / 2 - 40px);
+  left: calc(65vw + 20px);
+  height: 0;
+  overflow: visible;
+  writing-mode: tb;
+  font-size: 9px;
+  line-height: 2px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 400;
+  animation: scrollText-appear 1s ease-in
+}
+
+@keyframes scrollText-appear {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ScrollingWindow img:hover {
+  opacity: 1;
+  /* -webkit-animation-play-state: paused;
+     -moz-animation-play-state: paused;
+     -o-animation-play-state: paused;
+     animation-play-state: paused; */
+  animation: none;
+  top: 14px;
+  /*   transition: top 0s ease-in; */
+}
+
+.ScrollingWindow img {
+  position: relative;
+  top: 14px;
+  left: 0;
+  opacity: 1;
+}
+
+.ScrollingWindow.animated img {
+  animation: ScrollingWindow-appear 1 0.5s ease-in; /*, ScrollingWindow-auto-scroll 1 8s linear 0.6s;*/
+}
+
+@keyframes ScrollingWindow-appear {
+   from { opacity: 0 }
+   to { opacity: 1 }
+   }
+
+@keyframes ScrollingWindow-auto-scroll {
+  from {
+    top: 14px;
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+    top: calc(-500px / 2);
+  }
+  98% {
+    top: 14px;
+    display: none;
+  }
+  to {
+    display: block;
+    opacity: 0;
+  }
+}
+
+@media screen and (min-width: 568px) {
+   .titleBar {
+    max-width: 50vw;
+   }
+
+  .scrollText {
+    top: calc(50vh / 2 - 30px);
+    left: calc(50vw + 20px);
+  }
+
+  .ScrollingWindow {
+    max-width: 50vw;
+    max-height: 50vh;
+    overflow-y: scroll;
+    animation: none;
+  }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.25),
+only screen and ( min--moz-device-pixel-ratio: 1.25),
+only screen and ( -o-min-device-pixel-ratio: 1.25/1),
+only screen and ( min-device-pixel-ratio: 1.25),
+only screen and ( min-resolution: 200dpi),
+only screen and ( min-resolution: 1.25dppx)
+{
+  .titleBar {
+    background-image: url("../img/dither-1@2x.png");
+  }
+}

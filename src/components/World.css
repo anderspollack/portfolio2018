@@ -1,0 +1,559 @@
+.World {
+  border: 1px solid #000;
+  background-color: #fff;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  transition:
+    height 0.3s ease-in-out 0.1s,
+    left 0.2s ease-in,
+    top 0.2s ease-in,
+    width 0.2s ease-in;
+}
+
+.World.expanded {
+  height: calc(100% - 32px);
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+  transition:
+    height 0.3s ease-in-out,
+    left 0.3s ease-in,
+    top 0.3s ease-in,
+    width 0.3s ease-out;
+  /* transition:
+     background-position 0.2s ease-out,
+     width 0.1s ease-in,
+     height 0.2s ease-in-out 0.2s,
+     left 0.2s ease-in; */
+}
+
+.World:not(.expanded) {
+  cursor: pointer;
+}
+
+.clickableArea {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  /*   z-index: 300; */
+}
+
+.World.expanded .clickableArea {
+  background-size: 256px;
+  background-position: calc(50% - 10px) 124px;
+  background-repeat: no-repeat;
+  background-image: url("../img/tunnel.png");
+  opacity: 0;
+  animation: tunnel-appear 8 24s step-end;
+}
+
+@keyframes tunnel-appear {
+  from { opacity: 0 }
+  10% { opacity: 0 }
+  11% { opacity: 0.2 }
+  13% { opacity: 0 }
+  50% { opacity: 0 }
+  51% { opacity: 0.2 }
+  65% { opacity: 0 }
+  80% { opacity: 0 }
+  81% { opacity: 0.2 }
+  85% { opacity: 0 }
+  to { opacity: 0 }
+}
+
+.World.shortened .clickableArea {
+  top: 0;
+  
+}
+
+.World.collapsed {
+  height: 48px;
+  left: 16px;
+  width: calc(100vw - 32px);
+}
+
+.World.shortened {
+  width: 240px;
+  height: 48px;
+}
+
+.World.shortened::before {
+  content: '';
+  display: block;
+  position: relative;
+  width: 5px;
+  height: 48px;
+  background-image: url("../img/noise.png");
+  background-size: 1024px 768px;
+  animation: noise-appear 0.8s ease-in;
+}
+
+@keyframes noise-appear {
+  from{ width: 0; }
+  80%{ width: 0; }
+  to{ width: 5px; }
+}
+
+.Icon-world {
+  transition:
+    top 0.25s linear,
+    left 0.4s ease-in-out,
+    width 0.1s ease-in 0.3s,
+    height 0.1s ease-in 0.3s;
+  cursor: pointer;
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  opacity: 1;
+  background-image: url("../img/earth.png");
+  background-size: 28px;
+  background-repeat: no-repeat;
+}
+
+.Wireframe-world {
+  background-image: url("../img/icon-world.png");
+  background-repeat: none;
+  background-size: 32px;
+  animation: none;
+  position: fixed;
+  top: 56px;
+  left: calc(50vw - 112px);
+  height: 32px;
+  width: 32px;
+  opacity: 1;
+  animation: 
+    Wireframe-world-appear 0.8s ease-in,
+    Wireframe-world-hover 2s ease-in-out infinite alternate 0.2s; 
+}
+
+@keyframes Wireframe-world-appear {
+  from {
+    left: 50vw;
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  to {
+    left: calc(50vw - 120px);
+    opacity: 1;
+  }
+}
+
+@keyframes Wireframe-world-hover {
+  from {
+    top: 64px;
+  }
+  to {
+    top: 72px;
+  }
+}
+
+.World.collapsed .Icon-world,
+.World.shortened .Icon-world {
+  opacity: 1;
+  top: 10px;
+  left: 24px;
+}
+
+.World.expanded .Icon-world {
+  opacity: 1;
+  top: 48px;
+  width: 80px;
+  height: 80px;
+  left: calc(50vw - 40px);
+  /*   animation: World-hover 1.6s ease-in-out infinite alternate 0.5s; */
+}
+
+@media screen and (min-width: 400px) {
+  .World.expanded .Icon-world {
+    left: calc(50vw - 52px);
+  }
+}
+
+.World.expanded .Icon-world:not(.animated) {
+  opacity: 1;
+  animation: World-disappear 1 0.5s forwards step-end;
+}
+
+@keyframes World-disappear {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.Icon-world.animated {
+  background-image: url("../img/earth.png");
+  background-size: 80px;
+  animation:
+    World-appear 1 0.6s linear,
+    World-hover 1.6s ease-in-out infinite alternate 0.2s; 
+}
+
+@keyframes World-appear {
+  from {
+    opacity: 0;
+    background-size: 32px;
+  }
+  60% {
+    opacity: 0;
+  }
+  80% {
+    background-size: 32px;
+  }
+  to {
+    background-size: 80px;
+    opacity: 1;
+  }
+}
+
+@keyframes World-hover {
+  from {
+    top: 48px;
+  }
+  to {
+    top: 56px;
+  }
+}
+
+.World.collapsed .Icon-world {
+  left: 34px;
+}
+
+.World.shortened .Icon-world {
+  left: 10px;
+}
+
+.World .text {
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  transition:
+    top 0.3s ease-in-out,
+    left 0.3s ease-in-out;
+}
+
+.World.expanded .text {
+  top: 160px;
+  padding: 0 16px;
+  left: calc(50vw - 110px); 
+  height: calc(100vh - 6px;)
+}
+
+@media screen and (min-width: 400px) {
+  .World.expanded .text {
+    left: calc(50vw - 190px); 
+  }
+}
+
+.World.collapsed .text {
+   left: 80px;
+}
+
+
+.World.shortened .text {
+  left: 48px;
+}
+
+@media screen and (min-width: 568px) {
+  .World.shortened .text {
+    top: calc(100vw / 100 + 11px);
+    left: 7.7vw;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .World.shortened .text {
+    top: 15px;
+    left: 48px
+  }
+}
+
+.World h1 {
+  margin: 0;
+  font-size: 14px;
+  /* semibold */
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-align: center;
+  color: #000;
+  text-transform: uppercase;
+  transition:
+    font-size 0.2s ease-out, font-weight 0.2s ease-out;
+}
+
+.World.expanded h1 {
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: 10px;
+  /*   transition: left 0.2s ease-in-out; */
+}
+
+.World.collapsed h1 {
+  /* transition:
+     top 0.2s ease-in-out,
+     left 0.2s ease-in-out; */
+}
+
+.World.shortened h1 {
+
+  /*   transition: left 0.25s ease-in; */
+}
+
+@media screen and (min-width: 568px) {
+  .World.shortened h1 {
+    font-size: calc(100vw / 40 - 3px);
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .World.shortened h1 {
+    font-size: 14px;
+  }
+}
+.latin {
+  position: absolute;
+  left: 40px;
+  width: 100%;
+  /*   opacity: 0; */
+}
+
+.latin h2 {
+  margin: 0;
+  position: absolute;
+  font-size: 14px;
+  line-height: 48px;
+  letter-spacing: 24px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.orbis {
+  left: 72px;
+  opacity: 0;
+  animation: orbis-phase infinite 18s ease-in-out;
+}
+
+.sensualium {
+  animation: sensualium-phase infinite 18s ease-in-out;
+}
+
+.pictus {
+  left: 56px;
+  animation: pictus-phase infinite 18s ease-in-out;
+}
+
+@keyframes orbis-phase {
+  from {
+    opacity: 0;
+  }
+  17% {
+    opacity: 1;
+  }
+  33% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes sensualium-phase {
+  from {
+    opacity: 0;
+  }
+  33% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  67% {
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pictus-phase {
+  from {
+    opacity: 0;
+  }
+  67% {
+    opacity: 0;
+  }
+  84% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes old-orbis-appear {
+  from {
+    opacity: 0;
+    content: "orbis";
+  }
+  17% {
+    opacity: 1;
+    content: "orbis";
+  }
+  33% {
+    opacity: 0;
+    content: "sensualium";
+  }
+  50% {
+    opacity: 1;
+  }
+  67% {
+    opacity: 0;
+    content: "pictus";
+  }
+  83% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.intro {
+  cursor: help;
+  opacity: 1;
+  margin-top: 144px;
+  padding-right: 24px;
+  position: fixed;
+  left: 28px;
+  bottom: 28px;
+  animation: intro-appear 0.6s ease-in;
+}
+
+.intro p {
+  max-width: 100%;
+  font-size: 12px;
+  margin: 12px auto;
+}
+
+.intro p:last-of-type {
+  margin-bottom: 0;
+}
+
+@keyframes intro-appear {
+  from {
+    bottom: 16px;
+    opacity: 0;
+  }
+  50% {
+    bottom: 16px;
+    opacity: 0;
+  }
+  to{
+    bottom: 36px;
+    opacity: 1;
+  }
+}
+
+marquee {
+  height: auto;
+  width: 100%;
+  margin-top: 0;
+  position: fixed;
+  bottom: 4px;
+  animation: marquee-appear 3.6s linear;
+}
+
+@keyframes marquee-appear {
+  from {
+    opacity: 0;
+  }
+  65% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 492px) {
+  .World.collapsed {
+    width: 460px;
+  }
+}
+
+@media screen and (min-width: 532px) {
+  .World.collapsed {
+    /*     width: calc(100vw - 128px); */
+  }
+}
+
+@media screen and (min-width: 568px) {
+  .World.shortened {
+    width: calc(100% / 8 * 3);
+    transition: none;
+    transition:
+      height 0.3s ease-in-out,
+      left 0.3s ease-in,
+      width 0.2s linear;
+  }
+
+  .World.shortened::before {
+    content: unset;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .World.expanded .clickableArea {
+    background-position: calc(50%) 112px;
+  }
+  .World.expanded h1 {
+    max-width: 200px;
+  }
+  .latin {
+    left: 0;
+  }
+  .latin h2 {
+    font-size: 11px;
+    letter-spacing: 18px;
+  }
+  .orbis {
+    left: 56px;
+  }
+  .sensualium {
+    left: -6px;
+  }
+  .pictus {
+    left: 44px;
+  }
+}
+
+@media screen and (min-width: 912px) {
+  .World.shortened {
+    width: 342px;
+  }
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.25),
+only screen and ( min--moz-device-pixel-ratio: 1.25),
+only screen and ( -o-min-device-pixel-ratio: 1.25/1),
+only screen and ( min-device-pixel-ratio: 1.25),
+only screen and ( min-resolution: 200dpi),
+only screen and ( min-resolution: 1.25dppx)
+{
+  .Wireframe-world {
+    background-image: url("../img/icon-world@2x.png");
+  }
+
+  .World.shortened::before {
+    background-image: url("../img/noise@2x.png");
+  }
+  .World.expanded .clickableArea {
+    background-image: url("../img/tunnel@2x.png");
+  }
+}

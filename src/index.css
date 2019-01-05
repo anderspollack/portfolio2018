@@ -15,15 +15,45 @@ body {
 }
 
 h1 {
+  font-size: 24px;
   font-weight: 600;
   letter-spacing: 0.8px;
 }
 
+h2 {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  margin-bottom: 16px;
+}
+
 p {
   font-size: 13px;
-  line-height: 15px;
+  line-height: 18px;
   letter-spacing: 0.3px;
-  max-width: 400px;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+strong {
+  font-weight: 600;
+  letter-spacing: 0.8px;
+}
+
+a {
+  font-weight: 300;
+  color: #000;
+  padding: 3px 0;
+  margin: 0 6px;
+  text-decoration: none;
+  /*   background-color: #fff; */
+  border-bottom: 1px solid #000;
+}
+
+a:hover {
+  background-size: 16px;
+  background-repeat: repeat;
+  background-image: url("img/dither-1.png");
 }
 
 ul {
@@ -37,4 +67,17 @@ li {
 
 article img {
   max-width: 100%;
+}
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.25),
+only screen and ( min--moz-device-pixel-ratio: 1.25),
+only screen and ( -o-min-device-pixel-ratio: 1.25/1),
+only screen and ( min-device-pixel-ratio: 1.25),
+only screen and ( min-resolution: 200dpi),
+only screen and ( min-resolution: 1.25dppx)
+{
+  a:hover {
+    background-image: url("img/dither-1@2x.png");
+  }
 }

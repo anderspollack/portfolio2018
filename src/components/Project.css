@@ -1,0 +1,99 @@
+.Project {
+  width: 100%;
+  min-height: 89px;
+  background-color: #fff;
+  padding: 12px 12px 20px 12px;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.Project.selected {
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.Project.selected * {
+  display: none;
+}
+
+.Project:hover {
+  transition:
+    -webkit-border-radius 0.1s ease-out,
+    -moz-border-radius 0.1s ease-out,
+    border-radius 0.1s ease-out;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  border-radius: 24px;
+}
+
+.Project, .Project.selected::before {
+  display: inline-block;
+  margin: 2px 0 0 2px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* animation placeholder for project */
+.Project.selected::before {
+}
+
+.Project.selected::before {
+  background-color: #fff;
+  position: fixed;
+  content: "";
+  margin-top: 0;
+  top: 64px;
+  left: 16px;
+  height: calc(100% - 80px);
+  width: calc(100% - 32px);
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: 1px solid #000;
+}
+.Project h5 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 13px
+}
+
+@media screen and (min-width: 375px) {
+  .Project {
+    padding-bottom: 8px;
+  }
+  
+  .ProjectNav:not(.projectPage) .Project {
+    width: calc(50% - 3px);
+    min-height: 112px;
+  }
+  
+  .ProjectNav:not(.projectPage) .Project:not(.projectPage):nth-last-child(1):nth-child(odd) {
+    width: calc(100% - 4px);
+    min-height: 89px;
+  }
+}
+
+@media screen and (min-width: 420px) {  
+  .Project {
+    /*     width: 195px; */
+  }
+
+  .Project.selected::before {
+    width: calc(420px - 32px);
+  }
+}
+
+@media screen and (min-width: 568px) {
+  .ProjectNav.ProjectPage .Project {
+    max-height: 0;
+  }
+  .Project:nth-last-child(1):nth-child(odd) {
+    width: 100%;
+  }
+}
