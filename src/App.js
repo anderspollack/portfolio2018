@@ -128,22 +128,22 @@ class App extends Component {
 	    <World {...props} onClick={ this.handleWorldClick } expanded={ this.state.worldExpanded }/>
 	  )}/>
           <Route path="/projects" render={(props) => (
-            <div className="projectsWrapper">
-                <ProjectNav {...props}
-                  collections={ this.state.collections }
-                  projects={ this.state.projects }
-                  expandedCards={ this.state.expandedCards }
-                  onChange={ this.handleChange }
-                  onProjectSelect={ this.handleProjectSelect }
-                />
-	        <Route path="/projects/:projectName"
-                  render={(props) => (
-                   <ProjectPage {...props}
-                     project={ this.state.selectedProject }
-                     projects={ this.state.projects }
-                     onNavButtonClick={ this.handleNavButtonClick }/>
-                 )}/>
-            </div>
+              <div className="projectsWrapper">
+                  <ProjectNav {...props}
+                      collections={ this.state.collections }
+                                  projects={ this.state.projects }
+                                  expandedCards={ this.state.expandedCards }
+                                  onChange={ this.handleChange }
+                                  onProjectSelect={ this.handleProjectSelect }
+                  />
+	              <Route path="/projects/:projectName"
+                               render={(props) => (
+                                   <ProjectPage {...props}
+                                       project={ this.state.selectedProject }
+                                               projects={ this.state.projects }
+                                               onNavButtonClick={ this.handleNavButtonClick }/>
+                               )}/>
+              </div>
           )}/>
       </div>
     );

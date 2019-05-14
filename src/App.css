@@ -35,8 +35,9 @@ body {
   height: 100vh;
   position: absolute;
   top: 0;
-  // background-image: url("img/dither-1.png");
-  // animation: Background-morph infinite 0.5s linear;
+  /* background-image: url("img/dither-1.png");
+     animation: Background-morph infinite 0.5s linear;
+   */
 }
 
 @keyframes Background-morph {
